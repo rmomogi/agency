@@ -1,14 +1,23 @@
 {
   "development": {
-    "storage": "library_dev.sqlite",    
-    "dialect": "sqlite"
+    "username": "postgres",
+    "password": "1234",
+    "database": "agency_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   },
   "test": {
-    "storage": "library_dev.sqlite",    
-    "dialect": "sqlite"
+    "username": "postgres",
+    "password": "1234",
+    "database": "agency_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   },
   "production": {
-    "storage": "library_dev.sqlite",    
-    "dialect": "sqlite"
+    "username": "postgres",
+    "password": "1234",
+    "database": "agency_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   }
 }

@@ -8,7 +8,26 @@ html
 			link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800")
 			link(rel="stylesheet", href="/build.min.css")
 			
-	body
+	body.skin-blue.sidebar-mini
+		.wrapper
+			header.main-header
+				nav.navbar.navbar-static-top
+					a.sidebar-toggle(href="#" data-toggle="push-menu" role="button")
+					.navbar-custom-menu
+						ul.nav.navbar-nav
+							li.dropdown.user.user-menu
+								a.dropdown-toggle(href="#" data-toggle="dropdown")
+									img(src="/img/user2-160x160.png" alt="Logo")
+									span.hidden-xs #{user.fullName}
+
+			aside.main-sidebar
+				section.sidebar
+					user-painel
+						.pull-left.image
+							img(src="/img/user2-160x160.jpg").img-circle
+						.pull-left.info
+							p #{user.fullName}
+
 		aside.left-panel#left-panel
 			nav.navbar.navbar-expand-sm.navbar-default
 				.navbar-header

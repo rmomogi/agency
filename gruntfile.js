@@ -17,23 +17,11 @@ module.exports = function(grunt){
 		},
 		concat: {
 			js: {
-				src: ["components/js/vendor/jquery-2.1.4.min.js",
-							"components/js/popper.min.js",
-							"components/js/plugins.js",
-							"components/js/main.js",
-							"components/js/lib/chosen/chosen.jquery.min.js"],
+				src: "components/js/*.js",
 				dest: 'dist/build.js'	    	
 			},
 			css: {	  		
-				src: ["components/css/normalize.css",
-							"components/css/bootstrap.min.css",
-							"components/css/font-awesome.min.css",							
-							"components/css/themify-icons.css",
-							"components/css/flag-icon.min.css",
-							"components/css/cs-skin-elastic.css",
-							"components/css/lib/chosen/chosen.min.css",
-							"components/scss/style.css"
-							],
+				src: "components/css/*.css",
 				dest: 'dist/build.css'	    	
 			}
 		},

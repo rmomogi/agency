@@ -1,48 +1,42 @@
 html
 	head
-		title Library
+		title Agência
 		block scripts
 			script(src='/build.js')
 
 		block styles        
 			link(rel="stylesheet", type="text/css", href="/build.min.css")
 			
-	body.bg-dark
-		.sufee-login.d-flex.align-content-center.flex-wrap
-			.container
-				.login-content
-					.login-logo
+	body.register-page
+		.register-box
+			.register-logo
 
-					.login-form
-						form#form-register(method='POST' action='/signup')
-							.form-group
-								label(for="login-firstname") Primeiro nome
-								input.form-control#firstname(type="text", name="firstName" required="" placeholder='Primeiro nome')
+			.register-box-body
+				form#form-register(method='POST' action='/signup')
+					.form-group.has-feedback
+						input.form-control#fullName(type="text", name="fullName" required="" placeholder='Nome completo')
+						span.glyphicon.glyphicon-user.form-control-feedback
 
-							.form-group
-								label(for="login-lastname") Sobrenome
-								input.form-control#lastname(type="text", name="lastName" required="" placeholder='Sobrenome')
+					.form-group.has-feedback
+						input.form-control#email(type="email", name="email" required="" placeholder='E-mail')
+						span.glyphicon.glyphicon-envelope.form-control-feedback
 
-							.form-group
-								label(for="login-username") E-mail
-								input.form-control#email(type="text", name="email" required="" placeholder='E-mail')
+					.form-group.has-feedback
+						input.form-control#phone(type="text", name="phone" required="" placeholder='Contato')
+						span.glyphicon.glyphicon-phone.form-control-feedback
+						
+					.form-group.has-feedback
+						input.form-control#password(type="password", name="password" required="" placeholder='Senha')
+						span.glyphicon.glyphicon-lock.form-control-feedback
+				
+					br
+					.row
+						.col-md-12
+							button.btn.btn-primary.btn-block#login Registrar
 
-							.form-group
-								label(for="login-phone") Contato
-								input.form-control#phone(type="text", name="phone" required="" placeholder='Contato')
-								
-							.form-group
-								label(for="login-username") Senha
-								input.form-control#password(type="password", name="password" required="" placeholder='Senha')
-								
-							.checkbox      
-								label
-									input(type="checkbox")
-									|  Aceito os termos e condições
-
-							button.btn.btn-primary.btn-flat#login Registrar
-
-						.register-link.m-t-15.text-center
-							p Tem login? 
-								a(href="/") Acesse aqui
-
+					br
+					.row
+						.col-md-12
+							.text-center
+								p Tem login? 
+									a(href="/") Acesse aqui
