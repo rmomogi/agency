@@ -27,6 +27,10 @@ app.use(session({
 app.use(require('connect-flash')());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login session
+app.use(function(req,res,next){
+  res.locals.currentUser = req.user;
+  next();
+})
 
 require(path.join(__dirname, '..', 'config', 'auth.js'))(passport, models.User)
 require(path.join(__dirname, '..', 'config', 'route.js'))(app, passport)

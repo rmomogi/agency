@@ -1,0 +1,81 @@
+extends ../admin.pug
+
+block header
+	h1 Dashboard
+	ol.breadcrumb
+		li
+			a(href="/")
+				i.fa.fa-dashboard
+				| Home
+		li.active Serviços
+
+block content
+	.row
+		.col-md-12
+			.box
+				.box-header
+					.row
+						.col-md-8
+							h3.box-title Serviços
+						.col-md-4
+							.pull-right
+								.row
+									.col-md-9.col-xs-12
+										form(action='/services' role='form')
+											.input-group.input-group-sm
+												input.form-control#search(type="text" placeholder="Nome" name="search")
+												.input-group-btn
+													button.btn.btn-default(type='submit')
+														i.fa.fa-search
+									.col-md-3.col-xs-12.pull-right
+										a.btn.bg-purple.btn-sm.btn-flat(href='services/new') 
+											i.fa.fa-star 
+											|  Novo
+
+				.box-body.table-responsive.no-padding
+					table.table.table-hover
+						tbody
+							tr
+								th 
+									small #
+								th 
+									small Nome
+								th
+									small Descrição
+								th 
+									small Preço
+								th
+							each service in services
+								tr
+									td
+										small #{service.id}
+									td 
+										small #{service.name}
+									td 
+										small #{service.description.substring(0, 100)} ...
+									td 
+										small #{service.price}
+									td(class="text-right")
+										small 
+											a(href='/services/' + service.id + '/edit') Editar
+											span  &nbsp;|&nbsp;
+											a(href='#' data-target='#modal' data-toggle='modal' data-href='/services/' + service.id + '?_method=delete') Remover
+
+	.modal.fade#modal(tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="mediumModalLabel" style="display: none;")
+		.modal-dialog.modal-lg(role="document")
+			form#form-modal(action="" method="POST")
+				.modal-content
+					.modal-header
+						h5.modal-title Confirmação
+						button.close(aria-label="Close" type="button" data-dismiss="modal")
+					.modal-body
+						p Deseja remover o registro do sistema?
+					.modal-footer
+							button.btn.btn-secondary.btn-sm(type="button" data-dismiss="modal") Cancelar
+							button.btn.btn-success.btn-sm(type="submit") Confirmar
+
+	script.
+			jQuery('#modal').on('show.bs.modal', function(e) {
+				console.log(jQuery(e.relatedTarget).data('href'));
+				jQuery(this).find('#form-modal').attr('action', jQuery(e.relatedTarget).data('href'));
+			});

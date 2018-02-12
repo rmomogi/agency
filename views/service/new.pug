@@ -1,0 +1,42 @@
+extends ../admin.pug
+
+block header
+	h1 Dashboard
+	ol.breadcrumb
+		li
+			a(href="/")
+				i.fa.fa-dashboard
+				| Home
+		li.active Serviços
+
+
+block content
+	.row
+		.col-md-12
+			.box.box-primary
+				.box-header.with-border
+					h3.box-title Novo serviço
+				form(action="/services", method="post")
+					.box-body
+						.row
+							.col-md-10.col-xs-12
+								.form-group
+									label(for="name")
+										| Nome
+									input.form-control(type="text", name="name")
+							.col-md-2.col-xs-12
+								.form-group
+									label(for="price")
+										| Preço
+									input(type="text", name="price", class="form-control")
+						.row
+							.col-md-12.col-xs-12
+								.form-group
+									label(for="description")
+										| Descrição
+									textarea.form-control(rows="3" name="description")
+
+					.box-footer
+						input.pull-right(type="submit" class="btn btn-sm btn-success")
+
+	script.

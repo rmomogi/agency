@@ -26,15 +26,9 @@ module.exports = function(app, passport) {
       failureFlash : true // allow flash messages
   }));
 
-	app.all('/books*', isLoggedIn, function (req, res, next) {
-		next();
-	});	
-	app.all('/genres*', isLoggedIn, function (req, res, next) {
-		next();
-	});
-
-	app.resource('books', require(path.join(__dirname, '..' ,'controllers', 'Book')))
-	app.resource('genres', require(path.join(__dirname, '..' ,'controllers', 'Genre')))
+	app.all('/services*', isLoggedIn, function (req, res, next) { next(); });		
+	app.resource('services', require(path.join(__dirname, '..' ,'controllers', 'Service')))
+	
 }
 
 // route middleware to make sure a user is logged in

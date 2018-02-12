@@ -17,11 +17,18 @@ module.exports = function(grunt){
 		},
 		concat: {
 			js: {
-				src: "components/js/*.js",
+				src: ["components/js/jquery.min.js",
+					  "components/js/bootstrap.min.js",
+					  "components/js/adminlte.min.js",
+					  ],
 				dest: 'dist/build.js'	    	
 			},
 			css: {	  		
-				src: "components/css/*.css",
+				src: ["components/css/bootstrap.min.css",
+					  "components/css/AdminLTE.min.css",
+				      "components/css/skins/_all-skins.min.css",
+				      "components/css/font-awesome.css"
+				      ],
 				dest: 'dist/build.css'	    	
 			}
 		},

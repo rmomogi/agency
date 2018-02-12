@@ -10,16 +10,17 @@ html
   body.login-page
     .login-box
       .login-logo
-
+      
       .login-box-body
+        p.login-box-msg Acesso restrito ao sistema
         form#form-login(method='POST' action='/signin')
           .form-group.has-feedback
             input.form-control#email(type="email" name="email" required="" placeholder="E-mail")
-            span.glyphicon.glyphicon-envelope.form-control-feedback
+            span.fa.fa-envelope.form-control-feedback
 
           .form-group.has-feedback
             input.form-control#password(type="password" name="password" required="" placeholder="Senha")
-            span.glyphicon.glyphicon-lock.form-control-feedback
+            span.fa.fa-lock.form-control-feedback
           
           .row
             .col-md-12
