@@ -1,0 +1,41 @@
+html
+  head
+    title Agência
+    block scripts
+      script(src='/build.js')
+
+    block styles        
+      link(rel="stylesheet", type="text/css", href="/build.min.css")
+      
+  body.bg-dark
+    .sufee-login.d-flex.align-content-center.flex-wrap
+      .container
+        .login-content
+          .login-logo
+
+          .row
+            .col-md-12
+              if (message.length > 0)
+                .alert.alert-info
+                  span #{message}
+
+          .login-form
+            form#form-login(method='POST' action='/signin')
+              .form-group
+                label.col-form-label-sm(for="email") E-mail
+                input.form-control#email(type="text" name="email" required="")
+                
+              .form-group
+                label.col-form-label-sm(for="password") Senha
+                input.form-control#password(type="password" name="password" required="")
+                
+              .checkbox               
+                label.pull-right
+                  a(href="#") Esqueceu a senha?
+
+              button.btn.btn-success.btn-flat#login Acessar
+
+            .register-link.m-t-15.text-center
+              p Não tem login? 
+                a(href="/register") Cadastre aqui
+

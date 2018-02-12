@@ -1,0 +1,70 @@
+html
+	head
+		title Agência
+		block scripts
+			script(src='/build.js')
+
+		block styles				
+			link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800")
+			link(rel="stylesheet", href="/build.min.css")
+			
+	body
+		aside.left-panel#left-panel
+			nav.navbar.navbar-expand-sm.navbar-default
+				.navbar-header
+					button.navbar-toggler(type='button' data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle Navigation")
+						i.fa.fa-bars
+					a.navbar-brand(href="./")
+						img(src="/img/logo.png" alt="Logo")
+
+					a.navbar-brand.hidden(href="./")
+						img(src="/img/logo2.png" alt="Logo")
+
+				#main-menu.main-menu.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						li.active
+							a(href="/dashboard")
+								i.menu-icon.fa.fa-dashboard
+								| Dashboard
+						h3.menu-title Admin
+						li
+							a(href="/books")
+								i.menu-icon.fa.fa-book
+								| Livros
+						li
+							a(href="/genres")
+								i.menu-icon.fa.fa-cogs
+								| Gêneros
+						li
+							a(href="/users")
+								i.menu-icon.fa.fa-users
+								| Usuários
+						li
+							a(href="/loan")
+								i.menu-icon.fa.fa-bars
+								span Empréstimos
+
+		#right-panel.right-panel
+			header.header#header
+				.header-menu
+					.col-sm-7
+						a#menuToggle.menutoggle.pull-left
+							i.fa.fa-tasks(style="margin-top: 13px;")
+						.header-left
+					.col-sm-5
+						.user-area.dropdown.float-right
+							a.dropdown-toggle(href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+								img.user-avatar.rounded-circle(src="img/user.png" alt="User Avatar")
+								
+							.user-menu.dropdown-menu(x-placement="bottom-start")
+								//- a.nav-link(href="#")
+									i.fa.fa-user
+									|  Perfil
+								//	
+								a.nav-link(href="/logout")
+									i.fa.fa-power-off
+									|  Logout
+														
+			.content.mt-3
+				block content
+	

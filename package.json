@@ -1,0 +1,38 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cls && nodemon -e js,pug,html,css index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "express": "^4.16.2",
+    "express-resource": "^1.0.0",
+    "express-session": "^1.15.6",
+    "flash": "^1.1.0",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-rc.4",
+    "sequelize": "^4.32.2",
+    "sqlite3": "^3.1.13"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-css": "^0.5.4",
+    "nodemon": "^1.14.11",
+    "sequelize-cli": "^3.2.0"
+  },
+  "peerDependencies": {}
+}
