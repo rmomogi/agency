@@ -1,25 +1,32 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Services', {
+    return queryInterface.createTable('OAuthTokens', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      accessToken: {
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.TEXT
+      expires: {
+        type: Sequelize.DATE
       },
-      price: {
-        type: Sequelize.DECIMAL
+      client_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'OAuthClients',
+          key: 'id'
+        }
       },
-      status: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Services');
+    return queryInterface.dropTable('OAuthTokens');
   }
 };

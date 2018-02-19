@@ -13,12 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       associate: function(models) {
         // associations can be defined here
       }
-    },
-    instanceMethods: {
-      name: function(){
-        console.log(this.firstName + ' ' + this.lastName)
-        return this.firstName + ' ' + this.lastName
-      }
     }
   });
 

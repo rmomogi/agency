@@ -5,6 +5,7 @@ module.exports = function(passport, user){
 
 	var User = user;
 	var LocalStrategy = require('passport-local').Strategy;
+	var BearerStrategy = require('passport-http-bearer').Strategy;
 
 	// used to serialize the user for the session
   passport.serializeUser(function(user, done) {
@@ -89,5 +90,3 @@ module.exports = function(passport, user){
 		}
 	))
 }
-
-

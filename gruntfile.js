@@ -20,6 +20,7 @@ module.exports = function(grunt){
 				src: ["components/js/jquery.min.js",
 					  "components/js/bootstrap.min.js",
 					  "components/js/adminlte.min.js",
+					  "components/js/jquery.inputmask.bundle.js"
 					  ],
 				dest: 'dist/build.js'	    	
 			},

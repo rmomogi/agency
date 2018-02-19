@@ -1,12 +1,11 @@
 var models  = require('../models');
+const Sequelize = require('sequelize');
 
 exports.index = function(req, res){
-
   search = req.query.search || ''
-
 	models.Service.findAll({
     where:{
-      status: 'active',
+      status: true,
       name: { $like: '%' + search + '%' }
     }
   }).then(services => {    
@@ -25,15 +24,16 @@ exports.create = function(req, res){
   models.Service.create({
     name: req.body.name,
     description: req.body.description,
-    price: req.body.price    
+    price: parseFloat(req.body.price.replace('.', '').replace(',', '.')).toFixed(2)
   }).then(function() {
     req.flash("info", "O cadastro foi salvo com sucesso!");
     res.redirect('/services');
-  });
-};
-
-exports.show = function(req, res){
-  res.send('show forum ' + req.params.forum);
+  }).catch(Sequelize.ValidationError, function (msg){
+    console.log(msg.errors);
+    res.render("service/new", {
+      messages: msg.errors 
+    })
+  })
 };
 
 exports.edit = function(req, res){  
@@ -55,12 +55,18 @@ exports.update = function(req, res){
     service.updateAttributes({
       name: req.body.name,
       description: req.body.description,
-      price: req.body.price
+      price: parseFloat(req.body.price.replace('.', '').replace(',', '.')).toFixed(2)
     })
     .then(service => {
       req.flash("info", "O cadastro foi alterado com sucesso!");      
       res.redirect('/services');
     });
+  }).catch(Sequelize.ValidationError, function (msg){
+    console.log(msg.errors);
+    res.render("service/edit", {
+      service: service,
+      messages: msg.errors 
+    })
   }); 
 };
 
@@ -70,7 +76,7 @@ exports.destroy = function(req, res){
   })
   .then(service => {    
     service.updateAttributes({
-      status: 'inactive'
+      status: false
     })
     .then(service => {
       req.flash("info", "O cadastro foi removido com sucesso!");      

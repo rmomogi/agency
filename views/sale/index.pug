@@ -1,0 +1,93 @@
+extends ../admin.pug
+
+block header
+	h1 Dashboard
+	ol.breadcrumb
+		li
+			a(href="/")
+				i.fa.fa-dashboard
+				| Home
+		li.active Pedidos
+
+block content
+	.row
+		.col-md-12
+			.box
+				.box-header
+					.row
+						.col-md-8
+							h3.box-title Pedidos
+						.col-md-4
+							.pull-right
+								form(action='/pedidos' role='form')
+									.input-group.input-group-sm
+										input.form-control#search(type="text" placeholder="Número" name="search")
+										.input-group-btn
+											button.btn.btn-default(type='submit')
+												i.fa.fa-search
+
+				.box-body.no-padding
+					table.table
+						tbody
+							tr
+								th 
+									small Número
+								th 
+									small Cliente
+								th 
+									small Status
+								th
+									small Total
+								th 
+									small Data/Hora
+								th
+							each sale in sales
+								tr
+									td
+										small #{sale.number}
+									td 
+										small #{sale.User.fullName}
+									td
+										if sale.status == 1
+											small.label.label-warning Pendente
+										else if sale.status == 2
+											small.label.label.info Em atendimento
+										else if sale.status == 3
+											small.label.label-success Finalizado
+										else
+											small.label.label-danger Cancelado
+									td 
+										small R$ #{sale.total()}
+									td 
+										small #{sale.createdAt} 
+									td(class="text-right")
+										if sale.status == 1
+											small 
+												a(href='/sales/' + sale.id + '/attend') Atender
+											small  &nbsp;|&nbsp;
+											small
+												a(href='#' data-target='#modal' data-toggle='modal' data-href='/sales/' + sale.id + '?_method=delete') Cancelar 
+										else if sale.status == 2
+											a(href='/sales/' + sale.id + '/attend') Finalizar
+											span  &nbsp;|&nbsp;
+											a(href='#' data-target='#modal' data-toggle='modal' data-href='/sales/' + sale.id + '?_method=delete') Cancelar 
+										
+										
+	.modal.fade#modal(tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="mediumModalLabel" style="display: none;")
+		.modal-dialog.modal-lg(role="document")
+			form#form-modal(action="" method="POST")
+				.modal-content
+					.modal-header
+						h5.modal-title Confirmação
+						button.close(aria-label="Close" type="button" data-dismiss="modal")
+					.modal-body
+						p Deseja remover o registro do sistema?
+					.modal-footer
+							button.btn.btn-secondary.btn-sm(type="button" data-dismiss="modal") Cancelar
+							button.btn.btn-success.btn-sm(type="submit") Confirmar
+
+	script.
+			jQuery('#modal').on('show.bs.modal', function(e) {
+				console.log(jQuery(e.relatedTarget).data('href'));
+				jQuery(this).find('#form-modal').attr('action', jQuery(e.relatedTarget).data('href'));
+			});

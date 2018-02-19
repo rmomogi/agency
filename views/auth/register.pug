@@ -12,6 +12,11 @@ html
 			.register-logo
 
 			.register-box-body
+				p.login-box-msg Cadastre-se para utilização do sistema
+				if message && message.length > 0
+					.callout.callout-danger
+						= message
+
 				form#form-register(method='POST' action='/signup')
 					.form-group.has-feedback
 						input.form-control#fullName(type="text", name="fullName" required="" placeholder='Nome completo')
@@ -22,7 +27,7 @@ html
 						span.glyphicon.glyphicon-envelope.form-control-feedback
 
 					.form-group.has-feedback
-						input.form-control#phone(type="text", name="phone" required="" placeholder='Contato')
+						input.form-control.phone#phone(type="text", name="phone" required="" placeholder='Contato')
 						span.glyphicon.glyphicon-phone.form-control-feedback
 						
 					.form-group.has-feedback
@@ -40,3 +45,8 @@ html
 							.text-center
 								p Tem login? 
 									a(href="/") Acesse aqui
+
+	script.
+		$(document).ready(function(){
+			$('.phone').inputmask({"mask": "(99) 99999-9999"});
+		})

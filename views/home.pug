@@ -13,14 +13,20 @@ html
       
       .login-box-body
         p.login-box-msg Acesso restrito ao sistema
+
+        if messages && messages.length > 0
+          .callout.callout-danger
+            each message in messages
+              p= message['message']
+
         form#form-login(method='POST' action='/signin')
           .form-group.has-feedback
             input.form-control#email(type="email" name="email" required="" placeholder="E-mail")
-            span.fa.fa-envelope.form-control-feedback
+            span.glyphicon.glyphicon-envelope.form-control-feedback
 
           .form-group.has-feedback
             input.form-control#password(type="password" name="password" required="" placeholder="Senha")
-            span.fa.fa-lock.form-control-feedback
+            span.glyphicon.glyphicon-lock.form-control-feedback
           
           .row
             .col-md-12
@@ -29,7 +35,7 @@ html
           br
           .row
             .col-md-12
-              button.btn.btn-success.btn-block#login Acessar
+              button.btn.btn-success.btn-flat.btn-block#login Acessar
           br
           .row
             .col-md-12
