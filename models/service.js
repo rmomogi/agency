@@ -1,10 +1,27 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  
   var Service = sequelize.define('Service', {
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    price: DataTypes.DECIMAL,
-    status: DataTypes.ENUM('active', 'inactive') 
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'O nome do serviço é obrigatório!'
+        }
+      }
+    },
+    description: {
+      type: DataTypes.TEXT,
+      validate: {
+        notEmpty: {
+          msg: 'A descrição do serviço é obrigatório!'  
+        }        
+      }
+    },
+    price: {
+      type: DataTypes.DECIMAL
+    },
+    status: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

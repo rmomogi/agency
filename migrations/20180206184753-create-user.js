@@ -23,6 +23,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      salt:{
+        type: Sequelize.STRING
+      },
       last_login: {
         type: Sequelize.DATE
       },

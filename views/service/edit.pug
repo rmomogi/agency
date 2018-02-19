@@ -28,7 +28,7 @@ block content
 								.form-group
 									label(for="price")
 										| Preço
-									input.form-control(type="text", name="price" value=service.price)
+									input.form-control.moedaReal(type="text", name="price" value=service.price.replace(".",","))
 						.row
 							.col-md-12.col-xs-12
 								.form-group
@@ -40,3 +40,17 @@ block content
 						input.pull-right(type="submit" class="btn btn-sm btn-success")
 
 	script.
+		$(document).ready(function(){
+			$('.moedaReal').inputmask('decimal', {
+				radixPoint:",",
+				groupSeparator: ".",
+				autoGroup: true,
+				digits: 2,
+				digitsOptional: false,
+				placeholder: '0',
+				rightAlign: false,
+				onBeforeMask: function (value, opts) {
+					return value;
+				}
+			});
+		})

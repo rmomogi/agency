@@ -33,7 +33,7 @@ block content
 											|  Novo
 
 				.box-body.table-responsive.no-padding
-					table.table.table-hover
+					table.table.table-hover.table-sm
 						tbody
 							tr
 								th 
@@ -52,9 +52,12 @@ block content
 									td 
 										small #{service.name}
 									td 
-										small #{service.description.substring(0, 100)} ...
+										if service.description.length > 100
+											small #{service.description.substring(0, 100)} ...
+										else
+											small #{service.description}
 									td 
-										small #{service.price}
+										small R$ #{service.price.replace(".",",")}
 									td(class="text-right")
 										small 
 											a(href='/services/' + service.id + '/edit') Editar
