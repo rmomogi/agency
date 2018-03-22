@@ -2,10 +2,38 @@
 module.exports = (sequelize, DataTypes) => {
   
   var User = sequelize.define('User', {
-    fullName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    password: DataTypes.STRING,
+    fullName: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'O nome do usuário é obrigatório!'
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'O e-mail usuário é obrigatório!'
+        }
+      }
+    },
+    phone: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'O contato do usuário é obrigatório!'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'A senha do usuário é obrigatório!'
+        }
+      }
+    },
     last_login: DataTypes.DATE,
     status: DataTypes.ENUM('active', 'inactive') 
   }, {

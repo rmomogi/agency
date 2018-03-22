@@ -1,29 +1,21 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Services', {
+    return queryInterface.createTable('OAuthClients', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      client_id: {
+        type: Sequelize.TEXT        
       },
-      description: {
+      client_secret: {
+        type: Sequelize.TEXT        
+      },
+      redirect_uri: {
         type: Sequelize.TEXT
-      },
-      price: {
-        type: Sequelize.DECIMAL
-      },
-      package: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
-      status: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +28,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Services');
+    return queryInterface.dropTable('OAuthClients');
   }
 };

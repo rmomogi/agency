@@ -5,20 +5,19 @@ module.exports = function(passport, user){
 
 	var User = user;
 	var LocalStrategy = require('passport-local').Strategy;
-	var BearerStrategy = require('passport-http-bearer').Strategy;
 
 	// used to serialize the user for the session
-  passport.serializeUser(function(user, done) {
-  	done(null, user.id);
-  });
+	passport.serializeUser(function(user, done) {
+		done(null, user.id);
+	});
 
-  // used to deserialize the user
-  passport.deserializeUser(function(id, done) {  	
-    User.findById(id)
-    .then(function(user) {
-    	done(null, user);
-    });
-  });
+	// used to deserialize the user
+	passport.deserializeUser(function(id, done) {  	
+		User.findById(id)
+		.then(function(user) {
+			done(null, user);
+		});
+	});
 
 	passport.use('local-signup', new LocalStrategy({
 			usernameField: 'email',
@@ -52,9 +51,8 @@ module.exports = function(passport, user){
 				}
 			})
 			.catch(function(err){
-      	console.log("Error:", err);
-        return done(null, false, req.flash('signupMessage', 'Problema na autenticação do sistema. Tente novamente.')); 
-      });
+				return done(null, false, req.flash('signupMessage', 'Problema na autenticação do sistema. Tente novamente.')); 
+			});
 		}
 	))
 
@@ -66,27 +64,27 @@ module.exports = function(passport, user){
 		function(req, email, password, done){
 
 			var isValidPassword = function(userpass, password) {
- 	     return bCrypt.compareSync(password, userpass);
-      }
+			 return bCrypt.compareSync(password, userpass);
+			}
 
-      User.findOne({
-      	where: {
-      		email: email
-      	}
-      }).then(function(user){
-      	if(!user){
-      		return done(null, false, req.flash('loginMessage', 'Email não existe'));
-      	}
+			User.findOne({
+				where: {
+					email: email
+				}
+			}).then(function(user){
+				if(!user){
+					return done(null, false, req.flash('loginMessage', 'Email não existe'));
+				}
 
-      	if(!isValidPassword(user.password, password)) {
+				if(!isValidPassword(user.password, password)) {
 					return done(null, false, req.flash('loginMessage', 'Senha incorreta'));
-        }
+				}
 
-        var userinfo = user.get();
-        return done(null, userinfo);
-      }).catch(function(err){
-      	console.log("Error:", err);        
-      });
+				var userinfo = user.get();
+				return done(null, userinfo);
+			}).catch(function(err){
+				console.log("Error:", err);        
+			});
 		}
 	))
 }

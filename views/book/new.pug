@@ -1,0 +1,54 @@
+extends ../admin.pug
+
+block content  
+	.breadcrumb-holder
+		.container-fluid
+			ul.breadcrumb
+				li.breadcrumb-item
+					a(href="/") Home
+				li.breadcrumb-item
+					a(href="/books/") Livros
+				li.breadcrumb-item.active
+					span Novo
+
+	section
+		.container-fluid
+			header
+				h1.h3.display Livros
+
+			.row
+				.col-md-12.col-xs-12
+					.card
+						.card-header
+							span Novo cadastro
+						.card-body
+							form(action="/books", method="post")
+								.form-group
+									label(for="name")
+										| Nome
+									input(type="text", name="name", class="form-control")
+
+								.form-group
+									label(for="author")
+										| Autor
+									input(type="text", name="author", class="form-control")
+
+								.form-group
+									label(for="publishing_company")
+										| Editora
+									input(type="text", name="publishing_company", class="form-control")
+
+								.form-group
+									label(for="genre")
+										| Genêro									
+									select.form-control(data-placeholder="Selecione..." name="GenreId")
+										option 
+										each genre in genres
+											option(value=genre.id) #{genre.title}
+									
+																		
+									
+								input(type="submit" class="btn btn-sm btn-success")
+
+	script.
+		

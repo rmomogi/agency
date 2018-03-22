@@ -1,4 +1,5 @@
 const path = require('path')
+var OAuthServer = require('express-oauth-server');
 
 module.exports = function(app, passport) {
 
@@ -34,12 +35,21 @@ module.exports = function(app, passport) {
 	
 
 	// API
-	app.get('/api/v1/services', require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'Service')).all);
-	
-	app.post('/api/v1/sales', require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'Sale')).create);
-	//app.get('/api/v1/sales', require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'Sale')).all);
-	//app.get('/api/v1/sales/:id', require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'Sale')).find);
+	app.OAuthServer = new OAuthServer({
+		debug: true,
+		model: require('./oauth'),
+		grants: ['password']
+	});
 
+	app.all('/oauth/token', app.OAuthServer.token());
+
+	app.get('/api/v1/secure', app.OAuthServer.authenticate(), function(req,res){
+	  res.json({message: 'Secure data'})
+	});
+
+	app.get('/api/v1/services', app.OAuthServer.authenticate(), require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'Service')).all);
+	app.post('/api/v1/sales', app.OAuthServer.authenticate(), require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'Sale')).create);
+	app.post('/api/v1/users', require(path.join(__dirname, '..' ,'controllers', 'api', 'v1', 'User')).create);
 }
 
 // route middleware to make sure a user is logged in
