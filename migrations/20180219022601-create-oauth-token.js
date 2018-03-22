@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      accessToken: {
-        type: Sequelize.STRING
+      access_token: {
+        type: Sequelize.TEXT
       },
-      expires: {
+      access_token_expires_on: {
         type: Sequelize.DATE
       },
       client_id: {
@@ -27,6 +27,15 @@ module.exports = {
           model: 'Users',
           key: 'id'
         }
+      },
+      refresh_token: {
+        type: Sequelize.TEXT
+      },
+      scope: {
+        type: Sequelize.TEXT
+      },
+      refresh_token_expires_on: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

@@ -24,12 +24,12 @@ exports.create = function(req, res){
   models.Service.create({
     name: req.body.name,
     description: req.body.description,
-    price: parseFloat(req.body.price.replace('.', '').replace(',', '.')).toFixed(2)
+    price: parseFloat(req.body.price.replace('.', '').replace(',', '.')).toFixed(2),
+    package: req.body.package ? true : false
   }).then(function() {
     req.flash("info", "O cadastro foi salvo com sucesso!");
     res.redirect('/services');
-  }).catch(Sequelize.ValidationError, function (msg){
-    console.log(msg.errors);
+  }).catch(Sequelize.ValidationError, function (msg){    
     res.render("service/new", {
       messages: msg.errors 
     })
@@ -51,18 +51,18 @@ exports.update = function(req, res){
   models.Service.findOne({
     where: { id: req.params.service}
   })
-  .then(service => {    
+  .then(service => {        
     service.updateAttributes({
       name: req.body.name,
       description: req.body.description,
-      price: parseFloat(req.body.price.replace('.', '').replace(',', '.')).toFixed(2)
+      price: parseFloat(req.body.price.replace('.', '').replace(',', '.')).toFixed(2),
+      package: req.body.package ? true : false
     })
     .then(service => {
       req.flash("info", "O cadastro foi alterado com sucesso!");      
       res.redirect('/services');
     });
-  }).catch(Sequelize.ValidationError, function (msg){
-    console.log(msg.errors);
+  }).catch(Sequelize.ValidationError, function (msg){    
     res.render("service/edit", {
       service: service,
       messages: msg.errors 

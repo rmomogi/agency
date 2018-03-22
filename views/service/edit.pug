@@ -35,6 +35,16 @@ block content
 									label(for="description")
 										| Descrição
 									textarea.form-control(rows="3" name="description")= service.description
+						.row
+							.col-md-12.col-xs-12
+								.form-group
+									unless service.package
+										input(id='package' type='checkbox' name='package')
+									else
+										input(id='package' type='checkbox' name='package' checked)
+
+									label(for="package")
+										| &nbsp Venda como pacote?
 
 					.box-footer
 						input.pull-right(type="submit" class="btn btn-sm btn-success")

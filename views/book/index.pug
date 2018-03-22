@@ -1,0 +1,88 @@
+extends ../admin.pug
+
+block content  
+	.breadcrumb-holder
+		.container-fluid
+			ul.breadcrumb
+				li.breadcrumb-item
+					a(href="/") Home
+				li.breadcrumb-item.active
+					span Livros
+
+	section
+		.container-fluid
+			.row
+				.col-md-12.col-xs-12
+					for message in flash
+						.alert(class='alert-' + message.type)
+							= message.message
+						
+			header
+				h1.h3.display Livros
+
+			.row
+				.col-md-12.col-xs-12
+					.card
+						.card-header
+							.row
+								.col-md-10.col-xs-12
+									form(action='/books' role='form')
+										.input-group
+											input.form-control#search(type="text" placeholder="" name="search")
+											.input-group-btn
+												button.btn.btn-primary(type='submit')
+													i.fa.fa-search 
+													|  Buscar
+
+								.col-md-2.col-xs-12
+									a.btn.btn-info.btn-block(href='books/new') Novo
+
+						.card-body
+							.table-responsive
+								table.table.table-striped.table-sm
+									thead
+										tr
+											th 
+												small.font-weight-bold Nome
+											th 
+												small.font-weight-bold Autor
+											th 
+												small.font-weight-bold Editora
+											th 
+												small.font-weight-bold Gênero
+											th
+									tbody
+										each book in books
+											tr
+												td 
+													small #{book.name}
+												td 
+													small #{book.author}
+												td 
+													small #{book.publishing_company}
+												td 
+													small #{book.Genre.title}
+												td(class="text-right")
+													small 
+														a(href='/books/' + book.id + '/edit') Editar
+														span  &nbsp;|&nbsp;
+														a(href='#' data-target='#modal' data-toggle='modal' data-href='/books/' + book.id + '?_method=delete') Remover
+			
+			.modal.fade#modal(tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="mediumModalLabel" style="display: none;")
+							.modal-dialog.modal-lg(role="document")
+								form#form-modal(action="" method="POST")
+									.modal-content
+										.modal-header
+											h5.modal-title Confirmação
+											button.close(aria-label="Close" type="button" data-dismiss="modal")
+										.modal-body
+											p Deseja remover o registro do sistema?
+										.modal-footer
+												button.btn.btn-secondary.btn-sm(type="button" data-dismiss="modal") Cancelar
+												button.btn.btn-success.btn-sm(type="submit") Confirmar
+
+	script.
+		jQuery('#modal').on('show.bs.modal', function(e) {
+			console.log(jQuery(e.relatedTarget).data('href'));
+			jQuery(this).find('#form-modal').attr('action', jQuery(e.relatedTarget).data('href'));
+		});
