@@ -45,6 +45,8 @@ app.use(function(req,res,next){
 require(path.join(__dirname, '..', 'config', 'auth.js'))(passport, models.User)
 require(path.join(__dirname, '..', 'config', 'route.js'))(app, passport)
 
-app.listen(80, function(){
+var port = process.env.PORT || 3000;
+
+app.listen(port, function(){
 	console.log('Application listening port 80');
 });
