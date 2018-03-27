@@ -43,6 +43,6 @@ app.use(function(req,res,next){
 require(path.join(__dirname, '..', 'config', 'auth.js'))(passport, models.User)
 require(path.join(__dirname, '..', 'config', 'route.js'))(app, passport)
 
-app.listen(8080, function(){
-	console.log('Application listening port 8080');
+app.listen(80, function(){
+	console.log('Application listening port 80');
 });
