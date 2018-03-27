@@ -11,6 +11,7 @@ const OAuthServer 		= require('express-oauth-server');
 var bodyParser				= require('body-parser');
 var models 						= require('../models');
 var cors 							= require('cors');
+var cookieSession 		= require('cookie-session')
 
 app.use(morgan('dev')); // log every request to the console
 app.use(express.static(path.join(__dirname, '..', 'dist')));
@@ -22,11 +23,12 @@ app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: true}));
 
 // session support
-app.use(session({
-  resave: false, // don't save session if unmodified
-  saveUninitialized: false, // don't create session until something stored
-  secret: 'library'
-}));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['gorgonzola', 'mussarela'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 app.use(require('connect-flash')());
 app.use(passport.initialize());
